@@ -7,7 +7,10 @@ RUN curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash
 RUN apt-get install -y nodejs
 
-ADD run.sh /run.sh
-ADD index.js /index.js
+ADD grab.sh /usr/lib/node_modules/npm/node_modules/grab.sh
+ADD index.js /usr/lib/node_modules/npm/node_modules/index.js
 
-CMD /run.sh
+WORKDIR /usr/lib/node_modules/npm/node_modules
+RUN npm install chrome-remote-interface minimist 
+
+CMD /usr/lib/node_modules/npm/node_modules/grab.sh
